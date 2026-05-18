@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         source: "/sitemap-0.xml/",
         destination: "/sitemap-0.xml",
       },
+      {
+        source: "/google-sitemap.xml/",
+        destination: "/google-sitemap.xml",
+      },
     ];
   },
   images: {
