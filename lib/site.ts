@@ -3,7 +3,9 @@ export const siteConfig = {
   title: "HomeDecor AI | Android AI Home Design App",
   description:
     "Upload a photo and visualize professional-looking AI redesign concepts for rooms, exteriors, gardens, walls, floors, and objects before you renovate.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://homedecor.ai",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    "https://home-decor-web-mu.vercel.app",
   ogImage: "/opengraph-image",
   twitterHandle: "@homedecorai",
   brandBlue: "#3e63dd",
