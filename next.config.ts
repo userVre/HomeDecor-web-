@@ -40,6 +40,24 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: "/sitemap.txt",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
+          },
+        ],
+      },
+      {
+        source: "/sitemap.txt/",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
+          },
+        ],
+      },
     ];
   },
   async rewrites() {
@@ -51,6 +69,10 @@ const nextConfig: NextConfig = {
       {
         source: "/robots.txt/",
         destination: "/robots.txt",
+      },
+      {
+        source: "/sitemap.txt/",
+        destination: "/sitemap.txt",
       },
     ];
   },
