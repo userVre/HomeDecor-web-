@@ -12,22 +12,6 @@ const nextConfig: NextConfig = {
         source: "/robots.txt/",
         destination: "/robots.txt",
       },
-      {
-        source: "/sitemap.txt/",
-        destination: "/sitemap.txt",
-      },
-      {
-        source: "/sitemap_index.xml/",
-        destination: "/sitemap_index.xml",
-      },
-      {
-        source: "/sitemap-0.xml/",
-        destination: "/sitemap-0.xml",
-      },
-      {
-        source: "/google-sitemap.xml/",
-        destination: "/google-sitemap.xml",
-      },
     ];
   },
   images: {
