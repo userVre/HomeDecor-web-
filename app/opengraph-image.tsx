@@ -15,7 +15,7 @@ export default function OpenGraphImage() {
         style={{
           alignItems: "center",
           background: "#ffffff",
-          color: "#050505",
+          color: "#1c2024",
           display: "flex",
           height: "100%",
           justifyContent: "center",
@@ -70,15 +70,15 @@ export default function OpenGraphImage() {
           </div>
           <div
             style={{
-              color: "#5f6368",
+              color: "#60646c",
               display: "flex",
               fontSize: 30,
               lineHeight: 1.35,
               maxWidth: 820,
             }}
           >
-            Photorealistic room makeovers, luxury decor ideas, and intelligent
-            design planning.
+            AI-powered interiors, exteriors, gardens, walls, floors, and
+            renovation concepts from your phone.
           </div>
         </div>
       </div>

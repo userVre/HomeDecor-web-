@@ -31,7 +31,7 @@ export default async function BlogOpenGraphImage({
       <div
         style={{
           background: "#ffffff",
-          color: "#050505",
+          color: "#1c2024",
           display: "flex",
           height: "100%",
           padding: "64px",
@@ -71,7 +71,7 @@ export default async function BlogOpenGraphImage({
           </div>
           <div
             style={{
-              color: "#5f6368",
+              color: "#60646c",
               display: "flex",
               fontSize: 25,
               lineHeight: 1.35,
@@ -83,23 +83,58 @@ export default async function BlogOpenGraphImage({
         </div>
         <div
           style={{
-            background: "#f4f4f2",
+            alignItems: "center",
+            background: "#f0f0f3",
+            border: "1px solid #e8e8e8",
             display: "flex",
+            flexDirection: "column",
             height: "100%",
-            overflow: "hidden",
+            justifyContent: "center",
+            padding: "44px",
             width: "42%",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt={post.heroAlt}
-            src={post.heroImage}
+          <div
             style={{
-              height: "100%",
-              objectFit: "cover",
-              width: "100%",
+              alignItems: "center",
+              background: siteConfig.brandBlue,
+              borderRadius: 999,
+              color: "#ffffff",
+              display: "flex",
+              fontSize: 58,
+              fontWeight: 800,
+              height: 128,
+              justifyContent: "center",
+              width: 128,
             }}
-          />
+          >
+            H
+          </div>
+          <div
+            style={{
+              color: "#1c2024",
+              display: "flex",
+              fontSize: 34,
+              fontWeight: 700,
+              lineHeight: 1.1,
+              marginTop: 34,
+              textAlign: "center",
+            }}
+          >
+            {post.category}
+          </div>
+          <div
+            style={{
+              color: "#60646c",
+              display: "flex",
+              fontSize: 24,
+              lineHeight: 1.3,
+              marginTop: 18,
+              textAlign: "center",
+            }}
+          >
+            AI home design ideas for real spaces
+          </div>
         </div>
       </div>
     ),

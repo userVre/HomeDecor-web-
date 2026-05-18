@@ -4,8 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllBlogPosts, getBlogPost, formatPostDate } from "@/lib/blog";
+import { BlogFooterCta } from "@/components/blog-footer-cta";
 import { JsonLd } from "@/components/json-ld";
 import { mdxComponents } from "@/components/mdx-components";
+import { Reveal } from "@/components/reveal";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -46,7 +49,7 @@ export async function generateMetadata({
       url: absoluteUrl(`/blog/${post.slug}`),
       type: "article",
       publishedTime: post.date,
-      authors: [siteConfig.name],
+      authors: [post.author],
       images: [
         {
           url: post.heroImage,
@@ -73,8 +76,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const relatedPosts = getAllBlogPosts()
+    .filter(
+      (candidate) =>
+        candidate.slug !== post.slug && candidate.category === post.category,
+    )
+    .slice(0, 3);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <SiteHeader />
       <JsonLd
         data={{
@@ -87,7 +98,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           dateModified: post.date,
           author: {
             "@type": "Organization",
-            name: siteConfig.name,
+            name: post.author,
           },
           publisher: {
             "@type": "Organization",
@@ -101,68 +112,86 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
 
       <article>
-        <header className="mx-auto w-full max-w-7xl px-6 pb-12 pt-14 sm:px-8 lg:px-10">
+        <header className="mx-auto w-full max-w-[920px] px-6 pb-10 pt-12 sm:px-8">
           <Link
             href="/blog"
-            className="mb-10 inline-flex text-sm font-medium text-muted transition hover:text-foreground"
+            className="mb-10 inline-flex text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline"
           >
             Back to journal
           </Link>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <div>
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.24em] text-brand-blue">
-                {formatPostDate(post.date)} / {post.readingTime}
-              </p>
-              <h1 className="max-w-5xl text-balance text-4xl font-semibold leading-none tracking-normal sm:text-5xl md:text-7xl lg:text-[88px]">
-                {post.title}
-              </h1>
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-muted sm:text-xl md:text-2xl md:leading-9">
-                {post.excerpt}
-              </p>
-            </div>
-          </div>
+          <Reveal>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-brand-blue">
+              {post.category} / {formatPostDate(post.date)} / {post.readingTime}
+            </p>
+            <h1 className="max-w-[840px] text-balance text-[31px] font-semibold leading-[1.06] tracking-normal min-[420px]:text-[40px] sm:text-[56px] md:text-[64px]">
+              {post.title}
+            </h1>
+            <p className="mt-7 max-w-[720px] text-[18px] leading-8 text-muted sm:text-[20px] sm:leading-9">
+              {post.excerpt}
+            </p>
+            <p className="mt-6 text-sm font-medium text-muted">By {post.author}</p>
+          </Reveal>
         </header>
 
-        <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="aspect-[1.75] overflow-hidden bg-[#f4f4f2]">
+        <Reveal className="mx-auto w-full max-w-[1120px] px-6 sm:px-8">
+          <div className="aspect-[1.55] overflow-hidden rounded-[18px] bg-surface-strong sm:aspect-[1.8]">
             <Image
               src={post.heroImage}
               alt={post.heroAlt}
               width={2200}
               height={1257}
               priority
-              sizes="(min-width: 1280px) 1200px, 100vw"
+              sizes="(min-width: 1200px) 1120px, 100vw"
               className="size-full object-cover"
             />
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-16 sm:px-8 lg:grid-cols-[minmax(0,760px)_320px] lg:px-10">
-          <div className="min-w-0">
+        <div className="mx-auto w-full max-w-[760px] px-6 py-16 sm:px-8">
+          <Reveal className="article-prose min-w-0">
             <MDXRemote source={post.content} components={mdxComponents} />
-          </div>
-
-          <aside className="lg:sticky lg:top-8 lg:self-start">
-            <div className="border border-foreground bg-foreground p-8 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
-                HomeDecor AI
-              </p>
-              <h2 className="mt-6 text-2xl font-semibold leading-tight sm:text-3xl">
-                Transform your room now with HomeDecor AI - Download Free
-              </h2>
-              <p className="mt-5 text-base leading-7 text-white/70">
-                Generate room concepts, decor directions, and polished redesigns
-                before moving a single piece of furniture.
-              </p>
-              <Link
-                href="/"
-                className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-blue px-5 text-sm font-semibold text-white transition hover:bg-[var(--brand-blue-dark)]"
-              >
-                Download Free
-              </Link>
-            </div>
-          </aside>
+          </Reveal>
+          <BlogFooterCta />
         </div>
+
+        {relatedPosts.length > 0 ? (
+          <section className="mx-auto w-full max-w-[1120px] px-6 pb-20 sm:px-8">
+            <div className="border-t border-line pt-12">
+              <p className="mb-7 text-xs font-semibold uppercase tracking-[0.22em] text-brand-blue">
+                Keep reading
+              </p>
+              <div className="grid gap-8 md:grid-cols-3">
+                {relatedPosts.map((relatedPost) => (
+                  <Link
+                    key={relatedPost.slug}
+                    href={`/blog/${relatedPost.slug}`}
+                    className="group block"
+                  >
+                    <div className="aspect-[1.18] overflow-hidden rounded-[16px] bg-surface-strong">
+                      <Image
+                        src={relatedPost.thumbnail}
+                        alt={relatedPost.heroAlt}
+                        width={760}
+                        height={640}
+                        sizes="(min-width: 768px) 30vw, 100vw"
+                        className="size-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
+                      {relatedPost.category}
+                    </p>
+                    <h2 className="mt-3 text-balance text-xl font-semibold leading-tight decoration-foreground underline-offset-4 transition group-hover:underline">
+                      {relatedPost.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-6 text-muted">
+                      {relatedPost.readingTime}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </article>
       <SiteFooter />
     </main>

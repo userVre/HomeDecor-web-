@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "HomeDecor AI",
-  title: "HomeDecor AI | AI Interior Design & Room Makeovers",
+  title: "HomeDecor AI | Android AI Home Design App",
   description:
-    "Transform rooms with AI-powered interior design concepts, photorealistic makeovers, and luxury home decor inspiration.",
+    "Upload a photo and visualize professional-looking AI redesign concepts for rooms, exteriors, gardens, walls, floors, and objects before you renovate.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://homedecor.ai",
   ogImage: "/opengraph-image",
   twitterHandle: "@homedecorai",
-  brandBlue: "#2563eb",
+  brandBlue: "#3e63dd",
 };
 
 export function absoluteUrl(path = "/") {

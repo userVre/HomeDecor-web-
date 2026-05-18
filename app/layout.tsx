@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Analytics } from "@/components/analytics";
 import { AppProviders } from "@/components/app-providers";
 import { JsonLd } from "@/components/json-ld";
+import { LanguageRuntime } from "@/components/language-runtime";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -76,7 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body className="antialiased">
         <JsonLd
           data={{
             "@context": "https://schema.org",
@@ -94,7 +89,9 @@ export default function RootLayout({
             url: absoluteUrl("/"),
           }}
         />
+        <Analytics />
         <AppProviders>{children}</AppProviders>
+        <LanguageRuntime />
       </body>
     </html>
   );

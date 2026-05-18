@@ -1,25 +1,30 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import readingTime from "reading-time";
 
 const BLOG_DIRECTORY = path.join(process.cwd(), "content", "blog");
+const WORDS_PER_MINUTE = 225;
 
 export type BlogPost = {
   slug: string;
   title: string;
   date: string;
+  category: string;
+  author: string;
   excerpt: string;
   thumbnail: string;
   heroImage: string;
   heroAlt: string;
   readingTime: string;
+  wordCount: number;
   content: string;
 };
 
 type BlogFrontmatter = {
   title?: string;
   date?: string;
+  category?: string;
+  author?: string;
   excerpt?: string;
   thumbnail?: string;
   heroImage?: string;
@@ -43,6 +48,8 @@ function assertFrontmatter(
   const requiredFields: Array<keyof BlogFrontmatter> = [
     "title",
     "date",
+    "category",
+    "author",
     "excerpt",
     "thumbnail",
     "heroImage",
@@ -58,6 +65,27 @@ function assertFrontmatter(
   }
 }
 
+function getReadableWordCount(content: string) {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/[#*_>`~\-[\]()]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return plainText.match(/\b[\p{L}\p{N}'-]+\b/gu)?.length ?? 0;
+}
+
+function getReadingTime(content: string) {
+  const wordCount = getReadableWordCount(content);
+  const minutes = Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+
+  return {
+    readingTime: `${minutes} min read`,
+    wordCount,
+  };
+}
+
 export function getBlogPost(slug: string): BlogPost | null {
   const filePath = path.join(BLOG_DIRECTORY, `${slug}.mdx`);
 
@@ -70,16 +98,20 @@ export function getBlogPost(slug: string): BlogPost | null {
   const frontmatter = data as BlogFrontmatter;
 
   assertFrontmatter(frontmatter, slug);
+  const { readingTime, wordCount } = getReadingTime(content);
 
   return {
     slug,
     title: frontmatter.title,
     date: frontmatter.date,
+    category: frontmatter.category,
+    author: frontmatter.author,
     excerpt: frontmatter.excerpt,
     thumbnail: frontmatter.thumbnail,
     heroImage: frontmatter.heroImage,
     heroAlt: frontmatter.heroAlt,
-    readingTime: readingTime(content).text,
+    readingTime,
+    wordCount,
     content,
   };
 }

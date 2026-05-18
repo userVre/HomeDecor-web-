@@ -9,14 +9,15 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Interior Design Blog",
-  description: "Interior design ideas, AI room styling guides, and HomeDecor AI inspiration.",
+  description:
+    "Practical interior design, renovation, paint, flooring, garden, and AI visualization guides from HomeDecor AI.",
   alternates: {
     canonical: absoluteUrl("/blog"),
   },
   openGraph: {
     title: `Interior Design Blog | ${siteConfig.name}`,
     description:
-      "Interior design ideas, AI room styling guides, and HomeDecor AI inspiration.",
+      "Practical interior design, renovation, paint, flooring, garden, and AI visualization guides from HomeDecor AI.",
     url: absoluteUrl("/blog"),
     type: "website",
   },
@@ -24,6 +25,9 @@ export const metadata: Metadata = {
 
 export default function BlogIndexPage() {
   const posts = getAllBlogPosts();
+  const featuredPost = posts[0];
+  const remainingPosts = posts.slice(1);
+  const categories = ["Inspiration", "Design Tips", "AI Room Design", "For your home"];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -42,56 +46,92 @@ export default function BlogIndexPage() {
         }}
       />
 
-      <section className="mx-auto w-full max-w-7xl px-6 pb-20 pt-16 sm:px-8 lg:px-10">
-        <div className="max-w-4xl">
+      <section className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:px-10">
+        <div className="border-b border-line pb-10">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-brand-blue">
-            The Journal
+            HomeDecor AI Blog
           </p>
-          <h1 className="text-balance text-4xl font-semibold leading-none tracking-normal sm:text-5xl md:text-7xl">
-            A luxury magazine for AI-led interiors.
+          <h1 className="max-w-full text-balance text-3xl font-semibold leading-[1.02] tracking-normal min-[420px]:text-4xl sm:text-6xl md:text-7xl">
+            Design answers you can use before you spend.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
-            Read refined room studies, design intelligence, and practical guides
-            for turning blank spaces into considered homes.
+          <p className="mt-6 max-w-3xl text-base leading-7 text-muted min-[420px]:text-lg min-[420px]:leading-8 sm:text-xl">
+            Practical guides for rooms, renovations, paint, floors, gardens,
+            exteriors, and AI visualization. Learn the idea first, then test
+            the direction in the Android app when you are ready.
           </p>
+          <div className="mt-8 flex max-w-full flex-wrap gap-2 min-[420px]:gap-3">
+            {categories.map((category) => (
+              <span
+                key={category}
+                className="rounded-full border border-line px-3 py-2 text-xs font-medium text-muted min-[420px]:px-4 min-[420px]:text-sm"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-3">
-          {posts.map((post, index) => (
-            <article
-              key={post.slug}
-              className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
+        {featuredPost ? (
+          <article className="mt-14 border-b border-line pb-14">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="group grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"
             >
+              <div className="aspect-[1.22] overflow-hidden bg-surface-strong sm:aspect-[1.55] lg:aspect-[1.25]">
+                <Image
+                  src={featuredPost.thumbnail}
+                  alt={featuredPost.heroAlt}
+                  width={1500}
+                  height={1120}
+                  priority
+                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  className="size-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <div className="max-w-2xl min-w-0">
+                <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
+                  {featuredPost.category}
+                </p>
+                <h2 className="text-balance text-3xl font-semibold leading-tight tracking-normal decoration-foreground underline-offset-4 transition group-hover:underline sm:text-5xl">
+                  {featuredPost.title}
+                </h2>
+                <p className="mt-5 text-base leading-7 text-muted min-[420px]:text-lg min-[420px]:leading-8">
+                  {featuredPost.excerpt}
+                </p>
+                <p className="mt-7 text-sm font-medium text-muted">
+                  {featuredPost.author} / {formatPostDate(featuredPost.date)} /{" "}
+                  {featuredPost.readingTime}
+                </p>
+              </div>
+            </Link>
+          </article>
+        ) : null}
+
+        <div className="mt-12 grid gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          {remainingPosts.map((post) => (
+            <article key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="group block">
-                <div
-                  className={[
-                    "overflow-hidden bg-[#f4f4f2]",
-                    index === 0 ? "aspect-[1.35]" : "aspect-[1.12]",
-                  ].join(" ")}
-                >
+                <div className="aspect-[1.18] overflow-hidden bg-surface-strong">
                   <Image
                     src={post.thumbnail}
                     alt={post.heroAlt}
-                    width={index === 0 ? 1400 : 900}
-                    height={index === 0 ? 1040 : 800}
-                    priority={index === 0}
-                    sizes={index === 0 ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 28vw, 100vw"}
+                    width={900}
+                    height={760}
+                    sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 100vw"
                     className="size-full object-cover transition duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
-                <div className="border-b border-line py-7">
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                    {formatPostDate(post.date)}
+                <div className="border-b border-line py-6">
+                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
+                    {post.category}
                   </p>
-                  <h2
-                    className={[
-                      "text-balance font-semibold leading-tight tracking-normal transition group-hover:text-brand-blue",
-                      index === 0 ? "text-3xl sm:text-4xl md:text-5xl" : "text-2xl",
-                    ].join(" ")}
-                  >
+                  <h2 className="text-balance text-2xl font-semibold leading-tight tracking-normal decoration-foreground underline-offset-4 transition group-hover:underline">
                     {post.title}
                   </h2>
                   <p className="mt-4 text-base leading-7 text-muted">{post.excerpt}</p>
+                  <p className="mt-6 text-sm font-medium text-muted">
+                    {post.author} / {formatPostDate(post.date)} / {post.readingTime}
+                  </p>
                 </div>
               </Link>
             </article>
