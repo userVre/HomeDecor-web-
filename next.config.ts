@@ -2,6 +2,22 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml/",
+        destination: "/sitemap.xml",
+      },
+      {
+        source: "/sitemap-google.xml/",
+        destination: "/sitemap-google.xml",
+      },
+      {
+        source: "/robots.txt/",
+        destination: "/robots.txt",
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

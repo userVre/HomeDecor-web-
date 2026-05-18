@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /trpc/
+
+Sitemap: https://home-decor-web-mu.vercel.app/sitemap.xml
+Sitemap: https://home-decor-web-mu.vercel.app/sitemap-google.xml
