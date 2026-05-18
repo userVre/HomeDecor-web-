@@ -2,7 +2,6 @@ import { getAllBlogPosts } from "@/lib/blog";
 
 type SitemapEntry = {
   url: string;
-  lastModified: string;
 };
 
 const XML_CONTENT_TYPE = "application/xml; charset=utf-8";
@@ -23,20 +22,6 @@ function escapeXml(value: string | number) {
     .replace(/[&<>"']/g, (character) => XML_ENTITIES[character]);
 }
 
-function formatDate(date: Date) {
-  return date.toISOString();
-}
-
-function formatPostDateForSitemap(date: string, slug: string) {
-  const postDate = new Date(`${date}T00:00:00.000Z`);
-
-  if (Number.isNaN(postDate.getTime())) {
-    throw new Error(`Invalid sitemap date for post "${slug}": ${date}`);
-  }
-
-  return formatDate(postDate);
-}
-
 function encodeSitemapPath(path: string) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
@@ -51,32 +36,26 @@ function sitemapUrl(path = "/") {
 }
 
 function renderUrl(entry: SitemapEntry) {
-  return `<url><loc>${escapeXml(entry.url)}</loc><lastmod>${escapeXml(entry.lastModified)}</lastmod></url>`;
+  return `<url><loc>${escapeXml(entry.url)}</loc></url>`;
 }
 
 export function GET() {
-  const now = formatDate(new Date());
   const posts = getAllBlogPosts().map((post) => ({
     url: sitemapUrl(`/blog/${post.slug}`),
-    lastModified: formatPostDateForSitemap(post.date, post.slug),
   }));
 
   const entries: SitemapEntry[] = [
     {
       url: sitemapUrl("/"),
-      lastModified: now,
     },
     {
       url: sitemapUrl("/blog"),
-      lastModified: now,
     },
     {
       url: sitemapUrl("/how-it-works"),
-      lastModified: now,
     },
     {
       url: sitemapUrl("/compare"),
-      lastModified: now,
     },
     ...posts,
   ];
