@@ -17,7 +17,7 @@ export const comparisonPages: ComparisonPage[] = [
     slug: "homedecor-ai-vs-traditional-interior-design",
     title: "HomeDecor AI vs Traditional Interior Design",
     description:
-      "Compare HomeDecor AI with traditional interior design and learn when to use AI concepts before hiring a professional.",
+      "Compare HomeDecor AI with traditional interior design and learn when AI visual concepts are useful before hiring a professional.",
     intro:
       "Traditional interior design gives you expert planning, sourcing, measurements, and project management. HomeDecor AI is different: it helps you explore visual directions quickly before you commit budget to a larger project.",
     bestFor: [
@@ -29,33 +29,37 @@ export const comparisonPages: ComparisonPage[] = [
     rows: [
       {
         label: "Speed",
-        homedecor: "Generates concepts from a photo in seconds.",
+        homedecor:
+          "Generates one visual concept from a photo in moments; real timing can vary.",
         alternative: "Usually involves consultations, measurements, and design rounds.",
       },
       {
         label: "Cost",
-        homedecor: "Low-cost visual exploration through app credits or Pro access.",
+        homedecor:
+          "Free to start with Diamonds for generations, plus Pro for heavier exploration.",
         alternative: "Higher professional fees, often worth it for complex projects.",
       },
       {
         label: "Accuracy",
-        homedecor: "Great for inspiration, mood, color, and layout direction.",
-        alternative: "Better for exact measurements, materials, sourcing, and construction.",
+        homedecor:
+          "Great for inspiration, mood, color, materials, and visual layout direction.",
+        alternative:
+          "Better for measured plans, material specifications, sourcing, and construction.",
       },
       {
         label: "Best use",
-        homedecor: "Early-stage idea exploration.",
+        homedecor: "Early-stage visual idea exploration.",
         alternative: "Final planning, purchasing, technical drawings, and project delivery.",
       },
     ],
     takeaway:
-      "Use HomeDecor AI before the professional phase so you understand what you like. For structural work, permits, budgets, and exact specifications, bring in qualified experts.",
+      "Use HomeDecor AI before the professional phase so you understand what you like. For structural work, permits, budgets, measurements, and final specifications, bring in qualified experts.",
   },
   {
     slug: "homedecor-ai-vs-hiring-an-interior-designer",
     title: "HomeDecor AI vs Hiring an Interior Designer",
     description:
-      "See when HomeDecor AI is enough for quick visual ideas and when hiring an interior designer is the better choice.",
+      "See when HomeDecor AI is useful for quick visual ideas and when hiring an interior designer is the better choice.",
     intro:
       "Hiring an interior designer can be the right move for big renovations, custom furniture, sourcing, and full-service execution. HomeDecor AI helps you move faster at the inspiration stage.",
     bestFor: [
@@ -67,7 +71,8 @@ export const comparisonPages: ComparisonPage[] = [
     rows: [
       {
         label: "Creative options",
-        homedecor: "Lets you regenerate and compare many looks quickly.",
+        homedecor:
+          "Lets you regenerate and compare visual directions from your own photo.",
         alternative: "Designers create fewer but more deeply considered directions.",
       },
       {
@@ -82,12 +87,13 @@ export const comparisonPages: ComparisonPage[] = [
       },
       {
         label: "Deliverables",
-        homedecor: "Inspirational renders and concepts.",
+        homedecor:
+          "Visual redesign concepts, before/after comparison, downloads, sharing, and saved portfolio history.",
         alternative: "May include plans, shopping lists, schedules, and installation help.",
       },
     ],
     takeaway:
-      "HomeDecor AI is a smart first step. A designer is still valuable when the project needs precision, sourcing, installation, or professional accountability.",
+      "HomeDecor AI is a smart first visual step. A designer is still valuable when the project needs measured planning, sourcing, installation, or professional accountability.",
   },
   {
     slug: "homedecor-ai-vs-pinterest-inspiration",
@@ -106,7 +112,7 @@ export const comparisonPages: ComparisonPage[] = [
       {
         label: "Personalization",
         homedecor: "Uses your actual room, garden, exterior, wall, or floor photo.",
-        alternative: "Shows other people’s rooms and polished reference images.",
+        alternative: "Shows other people's rooms and polished reference images.",
       },
       {
         label: "Action",
@@ -115,7 +121,7 @@ export const comparisonPages: ComparisonPage[] = [
       },
       {
         label: "Speed",
-        homedecor: "Fast style testing from one uploaded photo.",
+        homedecor: "Fast style testing from one uploaded or captured photo.",
         alternative: "Can become a long scrolling and saving session.",
       },
       {
@@ -131,9 +137,9 @@ export const comparisonPages: ComparisonPage[] = [
     slug: "homedecor-ai-vs-mood-boards",
     title: "HomeDecor AI vs Mood Boards",
     description:
-      "Learn the difference between AI room redesign concepts and traditional interior design mood boards.",
+      "Learn the difference between AI redesign concepts and traditional interior design mood boards.",
     intro:
-      "Mood boards are useful for colors, textures, and materials, but they can feel abstract. HomeDecor AI turns those ideas into visual concepts inside a real room photo.",
+      "Mood boards are useful for colors, textures, and materials, but they can feel abstract. HomeDecor AI turns those ideas into visual concepts inside a real photo.",
     bestFor: [
       "Turning a mood into a room concept",
       "Previewing color palettes quickly",
@@ -173,10 +179,10 @@ export const comparisonPages: ComparisonPage[] = [
     intro:
       "Manual planning is useful when you need accuracy. An AI interior design app is useful when you need visual momentum and fast creative options before you measure and buy.",
     bestFor: [
-      "Exploring multiple layouts quickly",
+      "Exploring multiple layouts visually",
       "Testing visual styles before manual planning",
       "Previewing wall paint and floor finishes",
-      "Creating a direction before exact measurements",
+      "Creating a direction before measurements",
     ],
     rows: [
       {
@@ -192,7 +198,7 @@ export const comparisonPages: ComparisonPage[] = [
       {
         label: "Precision",
         homedecor: "Conceptual and inspirational.",
-        alternative: "Better for exact dimensions, traffic flow, and purchasing.",
+        alternative: "Better for measured dimensions, traffic flow, and purchasing.",
       },
       {
         label: "Best use",
@@ -201,7 +207,7 @@ export const comparisonPages: ComparisonPage[] = [
       },
     ],
     takeaway:
-      "Use AI first to choose the direction. Use manual planning afterward to confirm measurements, fit, traffic flow, cost, and real-world feasibility.",
+      "Use AI first to choose the visual direction. Use manual planning afterward to confirm measurements, fit, traffic flow, cost, and real-world feasibility.",
   },
 ];
 

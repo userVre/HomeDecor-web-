@@ -219,6 +219,13 @@ export function LanguageRuntime() {
     window.__homeDecorLanguage = language;
     window.__homeDecorTranslate = translatePage;
     translatePage(language);
+
+    const retries = [
+      window.setTimeout(() => translatePage(language), 350),
+      window.setTimeout(() => translatePage(language), 1400),
+    ];
+
+    return () => retries.forEach((retry) => window.clearTimeout(retry));
   }, []);
 
   return null;
