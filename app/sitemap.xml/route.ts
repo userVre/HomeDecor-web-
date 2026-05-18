@@ -3,8 +3,6 @@ import { getAllBlogPosts } from "@/lib/blog";
 type SitemapEntry = {
   url: string;
   lastModified: string;
-  changeFrequency: "daily" | "weekly" | "monthly";
-  priority: number;
 };
 
 const XML_CONTENT_TYPE = "application/xml; charset=utf-8";
@@ -53,7 +51,7 @@ function sitemapUrl(path = "/") {
 }
 
 function renderUrl(entry: SitemapEntry) {
-  return `<url><loc>${escapeXml(entry.url)}</loc><lastmod>${escapeXml(entry.lastModified)}</lastmod><changefreq>${escapeXml(entry.changeFrequency)}</changefreq><priority>${escapeXml(entry.priority)}</priority></url>`;
+  return `<url><loc>${escapeXml(entry.url)}</loc><lastmod>${escapeXml(entry.lastModified)}</lastmod></url>`;
 }
 
 export function GET() {
@@ -61,34 +59,24 @@ export function GET() {
   const posts = getAllBlogPosts().map((post) => ({
     url: sitemapUrl(`/blog/${post.slug}`),
     lastModified: formatPostDateForSitemap(post.date, post.slug),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
   }));
 
   const entries: SitemapEntry[] = [
     {
       url: sitemapUrl("/"),
       lastModified: now,
-      changeFrequency: "daily",
-      priority: 1.0,
     },
     {
       url: sitemapUrl("/blog"),
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
     },
     {
       url: sitemapUrl("/how-it-works"),
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.85,
     },
     {
       url: sitemapUrl("/compare"),
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.75,
     },
     ...posts,
   ];
