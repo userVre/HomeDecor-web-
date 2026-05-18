@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://home-decor-web-mu.vercel.app/sitemap.txt
