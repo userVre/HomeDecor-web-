@@ -9,10 +9,6 @@ const nextConfig: NextConfig = {
         destination: "/sitemap.xml",
       },
       {
-        source: "/sitemap-google.xml/",
-        destination: "/sitemap-google.xml",
-      },
-      {
         source: "/robots.txt/",
         destination: "/robots.txt",
       },
