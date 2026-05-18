@@ -4,6 +4,9 @@ import { getAllBlogPosts } from "@/lib/blog";
 const BASE_URL = "https://home-decor-web-mu.vercel.app";
 const STATIC_PATHS = ["/", "/blog", "/how-it-works", "/compare"];
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 function cleanSlug(slug: string) {
   return slug
     .trim()
