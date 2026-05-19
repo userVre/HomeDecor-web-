@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://home-decor-web-mu.vercel.app/google-sitemap.xml
-Sitemap: https://home-decor-web-mu.vercel.app/sitemap.txt
+Sitemap: https://home-decor-web-mu.vercel.app/sitemap.xml
