@@ -8,7 +8,6 @@ import { BlogFooterCta } from "@/components/blog-footer-cta";
 import { JsonLd } from "@/components/json-ld";
 import { mdxComponents } from "@/components/mdx-components";
 import { Reveal } from "@/components/reveal";
-import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -85,7 +84,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <ScrollProgress />
       <SiteHeader />
       <JsonLd
         data={{

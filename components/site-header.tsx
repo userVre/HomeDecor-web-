@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { LanguageSwitcher } from "@/components/language-switcher";
 
 const testingUrl =
   "https://play.google.com/apps/testing/com.ismail.homedecorai";
@@ -36,7 +35,6 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <LanguageSwitcher />
         <a
           href={testingUrl}
           target="_blank"

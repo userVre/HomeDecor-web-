@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@/components/analytics";
-import { AppProviders } from "@/components/app-providers";
 import { JsonLd } from "@/components/json-ld";
-import { LanguageRuntime } from "@/components/language-runtime";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -90,8 +88,7 @@ export default function RootLayout({
           }}
         />
         <Analytics />
-        <AppProviders>{children}</AppProviders>
-        <LanguageRuntime />
+        {children}
       </body>
     </html>
   );
